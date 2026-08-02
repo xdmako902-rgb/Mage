@@ -4,7 +4,7 @@
   "description": "WhatsApp Bot Base Created By MAKO MD",
   "main": "index.js",
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "scripts": {
     "start": "node index.js"
@@ -38,4 +38,4 @@
     "mongoose": "^8.0.0",
     "moment-timezone": "^0.6.0"
   }
-}
+  }
