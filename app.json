@@ -1,0 +1,18 @@
+{
+  "name": "♥️MAKO MD MINI PAIR♥️",
+  "description": "SESSION ID GENERATOR FOR MAKO MD MINI BOT",
+  "logo": "https://ibb.co/k22X1jmF",
+  "repository": "https://github.com",
+  "keywords": ["@Mako-MD", "whatsapp-bot", "mako-md-mini"],
+  "success_url": "/", 
+  "buildpacks": [
+    { "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" }
+  ],
+  "env": {      
+    "MESSAGE": {
+      "description": "Msg Attached With Session ID",
+      "value": "🔰 MAKO MD MINI BOT || BY PODI MAKO 🔰",
+      "required": false 
+    }
+  }
+}
