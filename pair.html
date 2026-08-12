@@ -78,13 +78,45 @@ body::after{content:"";position:fixed;inset:0;background-image:linear-gradient(r
 <script>
 const particles=document.getElementById("particles");
 for(let i=0;i<45;i++){const p=document.createElement("div");p.className="particle";p.style.left=Math.random()*100+"%";p.style.animationDuration=(5+Math.random()*10)+"s";p.style.animationDelay=Math.random()*8+"s";p.style.transform=`scale(${.3+Math.random()})`;particles.appendChild(p)}
-function generatePair(){
- const phone=document.getElementById("phone").value.trim(),loading=document.getElementById("loading"),result=document.getElementById("result"),resultText=document.getElementById("resultText");
- if(phone===""){result.style.display="block";resultText.innerHTML="⚠ PLEASE ENTER YOUR PHONE NUMBER";return}
- loading.style.display="block";result.style.display="none";
- setTimeout(()=>{loading.style.display="none";result.style.display="block";resultText.innerHTML="PAIR REQUEST SENT • "+phone},1500);
+
+async function generatePair(){
+ const phone=document.getElementById("phone").value.trim();
+ const loading=document.getElementById("loading");
+ const result=document.getElementById("result");
+ const resultText=document.getElementById("resultText");
+
+ if(phone===""){
+   result.style.display="block";
+   resultText.innerHTML="⚠ PLEASE ENTER YOUR PHONE NUMBER";
+   return;
+ }
+
+ const cleanNumber = phone.replace(/[^0-9]/g, '');
+
+ loading.style.display="block";
+ result.style.display="none";
+
+ try {
+   // ඔබගේ Backend Server URL එක මෙතැනට ඇතුළත් කරන්න
+   const response = await fetch(`https://YOUR_BACKEND_URL/code?number=${cleanNumber}`);
+   const data = await response.json();
+
+   loading.style.display="none";
+   result.style.display="block";
+
+   if(data.code) {
+     resultText.innerHTML = `<span style="font-size: 20px; font-weight: bold; letter-spacing: 4px;">${data.code}</span>`;
+   } else {
+     resultText.innerHTML = "❌ COULD NOT GENERATE PAIR CODE";
+   }
+ } catch(error) {
+   loading.style.display="none";
+   result.style.display="block";
+   resultText.innerHTML="⚠️ SERVER CONNECTION ERROR";
+ }
 }
+
 document.getElementById("phone").addEventListener("keydown",e=>{if(e.key==="Enter")generatePair()});
 </script>
 </body>
- </html>
+</html>
