@@ -3,450 +3,614 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAKO MD 🦋</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<title>BLACK QUEEN MD V1 — Official</title>
+<meta name="description" content="BLACK QUEEN MD V1 — Your futuristic WhatsApp bot experience.">
 <style>
-/* ===============================
-   ORIGINAL STRUCTURE - UPGRADED VISUALS
-   =============================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,sans-serif;background:#020202;color:#fff;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 20% 10%,rgba(255,255,255,.08),transparent 25%),
+    radial-gradient(circle at 85% 35%,rgba(255,255,255,.045),transparent 28%);
+}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
+.container{width:min(1160px,92%);margin:auto}
+
+/* Background */
+.grid-bg{
+ position:fixed;inset:0;pointer-events:none;opacity:.15;z-index:-3;
+ background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+ background-size:55px 55px;
+ mask-image:linear-gradient(to bottom,#000,transparent 90%);
+}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.12;z-index:-2}
+.orb.one{width:260px;height:260px;background:#fff;left:-120px;top:180px}
+.orb.two{width:220px;height:220px;background:#fff;right:-90px;top:650px}
+.particle{position:fixed;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.3;z-index:-1;animation:float 9s linear infinite}
+@keyframes float{from{transform:translateY(105vh)}to{transform:translateY(-10vh)}}
+
+/* Header */
+header{
+ position:fixed;top:0;left:0;right:0;z-index:100;
+ border-bottom:1px solid rgba(255,255,255,.08);
+ background:rgba(2,2,2,.72);backdrop-filter:blur(18px);
+}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-mark{
+ width:42px;height:42px;border:1px solid #fff;border-radius:13px;
+ display:grid;place-items:center;font-family:Orbitron;font-size:13px;font-weight:900;
+ box-shadow:0 0 25px rgba(255,255,255,.12)
+}
+.logo-title{font-family:Orbitron;font-weight:800;font-size:13px;letter-spacing:1px}
+.logo-sub{font-size:8px;color:#666;margin-top:3px}
+.nav-links{display:flex;gap:25px;color:#888;font-size:12px}
+.nav-links a:hover{color:#fff}
+.nav-btn{
+ padding:10px 16px;border:1px solid #fff;border-radius:10px;background:#fff;color:#000;
+ font-size:11px;font-weight:800
+}
+.menu{display:none;background:transparent;color:#fff;border:1px solid #333;border-radius:9px;padding:8px 11px}
+
+/* Hero */
+.hero{padding:155px 0 90px;min-height:760px;display:flex;align-items:center}
+.hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:55px;align-items:center}
+.badge{
+ display:inline-flex;align-items:center;gap:8px;border:1px solid #252525;
+ background:#080808;border-radius:999px;padding:8px 13px;color:#aaa;font-size:10px;
+ margin-bottom:20px
+}
+.live{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff}
+h1{font-family:Orbitron;font-size:clamp(38px,6vw,76px);line-height:1.02;letter-spacing:-2px}
+.gradient{color:#777}
+.hero p{color:#888;max-width:570px;line-height:1.8;font-size:14px;margin:22px 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.primary,.secondary{
+ border-radius:12px;padding:13px 19px;font-size:11px;font-weight:800;
+ transition:.25s
+}
+.primary{background:#fff;color:#000;border:1px solid #fff}
+.secondary{background:#080808;color:#fff;border:1px solid #333}
+.primary:hover,.secondary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,255,255,.1)}
+.hero-card{
+ border:1px solid #1c1c1c;border-radius:28px;padding:18px;background:#070707;
+ box-shadow:0 30px 90px rgba(0,0,0,.6),inset 0 0 50px rgba(255,255,255,.02)
+}
+.phone{
+ min-height:430px;border:1px solid #242424;border-radius:22px;padding:18px;
+ background:linear-gradient(145deg,#111,#030303);position:relative;overflow:hidden
+}
+.phone:before{
+ content:"";position:absolute;width:260px;height:260px;border-radius:50%;
+ background:#fff;filter:blur(100px);opacity:.07;right:-100px;top:-100px
+}
+.phone-top{display:flex;justify-content:space-between;color:#777;font-size:9px}
+.bot-avatar{
+ width:90px;height:90px;border-radius:25px;border:1px solid #fff;
+ display:grid;place-items:center;font-family:Orbitron;font-size:25px;font-weight:900;
+ margin:65px auto 18px;box-shadow:0 0 45px rgba(255,255,255,.13)
+}
+.phone h3{text-align:center;font-family:Orbitron;font-size:17px}
+.phone p{text-align:center;color:#666;font-size:10px;margin:8px 0 25px}
+.status-box{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.mini{border:1px solid #1d1d1d;background:#090909;border-radius:13px;padding:14px}
+.mini b{display:block;font-family:Orbitron;font-size:14px}
+.mini span{font-size:8px;color:#666}
+
+/* Sections */
+section{padding:90px 0}
+.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}
+.kicker{font-size:9px;color:#666;letter-spacing:3px;margin-bottom:8px}
+h2{font-family:Orbitron;font-size:28px}
+.section-head p{color:#666;font-size:11px;max-width:430px;line-height:1.7}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{
+ border:1px solid #171717;background:linear-gradient(145deg,#090909,#050505);
+ border-radius:18px;padding:22px;transition:.3s
+}
+.card:hover{transform:translateY(-5px);border-color:#444;box-shadow:0 18px 45px rgba(0,0,0,.45)}
+.icon{
+ width:42px;height:42px;border:1px solid #292929;border-radius:12px;display:grid;place-items:center;
+ font-family:Orbitron;font-size:12px;margin-bottom:18px
+}
+.card h3{font-size:14px;margin-bottom:8px}
+.card p{font-size:11px;color:#666;line-height:1.7}
+
+/* Commands */
+.command-search{
+ width:280px;background:#070707;border:1px solid #202020;color:#fff;border-radius:10px;
+ padding:11px 13px;outline:none;font-size:11px
+}
+.commands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cmd{
+ padding:16px;border:1px solid #181818;border-radius:13px;background:#070707;transition:.25s
+}
+.cmd:hover{background:#fff;color:#000;transform:translateY(-3px)}
+.cmd code{font-family:Orbitron;font-size:11px;font-weight:700}
+.cmd span{display:block;color:#666;font-size:9px;margin-top:6px}
+.cmd:hover span{color:#444}
+
+/* Connect */
+.connect{
+ border:1px solid #242424;border-radius:25px;padding:35px;
+ background:radial-gradient(circle at 90% 0,rgba(255,255,255,.07),transparent 35%),#080808
+}
+.connect-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.steps{display:grid;gap:12px}
+.step{display:flex;gap:13px;align-items:flex-start}
+.num{
+ min-width:30px;height:30px;border:1px solid #333;border-radius:9px;display:grid;place-items:center;
+ font-family:Orbitron;font-size:10px
+}
+.step b{font-size:11px}.step p{font-size:9px;color:#666;margin-top:4px;line-height:1.6}
+.connect-box{border:1px solid #1c1c1c;background:#050505;border-radius:17px;padding:20px}
+.input{
+ width:100%;background:#090909;border:1px solid #222;color:#fff;border-radius:10px;
+ padding:13px;outline:none;font-size:11px;margin-bottom:10px
+}
+.connect-result{
+ display:none;margin-top:12px;padding:14px;border:1px dashed #333;border-radius:11px;
+ color:#aaa;font-size:10px;line-height:1.6
 }
 
-:root {
-    --rgb-speed: 16s;
-    --glass-bg: rgba(0, 0, 0, 0.85);
-    --border-glow: rgba(255, 255, 255, 0.08);
-}
-
-body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    background: #0a0a0f;
-    color: #fff;
-    padding: 20px;
-    background-image: 
-        radial-gradient(ellipse at 20% 50%, rgba(120, 80, 255, 0.05) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 50%, rgba(255, 80, 120, 0.05) 0%, transparent 60%);
-}
-
-/* Card */
-.card {
-    width: 90%;
-    max-width: 420px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 28px;
-    padding: 32px 24px 28px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 
-        0 30px 80px rgba(0, 0, 0, 0.8),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    transition: all 0.3s;
-}
-
-/* Rainbow Text Animation */
-@keyframes rgbText {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 400% 50%; }
-}
-
-.rgb-text {
-    background: linear-gradient(90deg, 
-        #ff4d6d, #ff8a4d, #ffd93d, #6bcb77, #4d96ff, #9b59ff, #ff4d6d
-    );
-    background-size: 400% 100%;
-    animation: rgbText var(--rgb-speed) linear infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Titles */
-h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 2px;
-}
-
-h1:last-of-type {
-    font-size: 1.6rem;
-    margin-bottom: 4px;
-}
-
-/* Status */
-.status {
-    font-size: 0.75rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    opacity: 0.8;
-    margin: 6px 0 16px 0;
-    font-weight: 500;
-}
-
-/* ===== INPUT & BUTTON ===== */
-/* EXACT SAME STRUCTURE AS ORIGINAL */
-.input-wrap {
-    background: transparent;
-    border-radius: 16px;
-    padding: 0;
-    margin-bottom: 14px;
-}
-
-input {
-    width: 100%;
-    border: 2px solid rgba(255, 255, 255, 0.08);
-    outline: none;
-    padding: 16px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.03);
-    color: #fff;
-    text-align: center;
-    font-size: 1.05rem;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s;
-    backdrop-filter: blur(10px);
-}
-
-input:focus {
-    border-color: rgba(255, 100, 200, 0.4);
-    box-shadow: 0 0 30px rgba(155, 89, 255, 0.08);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-input::placeholder {
-    color: #555;
-}
-
-button {
-    width: 100%;
-    border: none;
-    border-radius: 16px;
-    padding: 16px;
-    font-size: 1.05rem;
-    font-weight: 600;
-    cursor: pointer;
-    background: linear-gradient(135deg, rgba(255, 77, 109, 0.15), rgba(155, 89, 255, 0.15));
-    color: #fff;
-    transition: all 0.3s;
-    border: 2px solid rgba(255, 255, 255, 0.08);
-    letter-spacing: 0.5px;
-    backdrop-filter: blur(10px);
-}
-
-button:hover {
-    background: linear-gradient(135deg, rgba(255, 77, 109, 0.25), rgba(155, 89, 255, 0.25));
-    border-color: rgba(255, 100, 200, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(155, 89, 255, 0.15);
-}
-
-button:active {
-    transform: translateY(0px);
-}
-
-/* ===== RESULT BOX ===== */
-#result {
-    margin-top: 20px;
-    min-height: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.code-display {
-    padding: 14px 24px;
-    border-radius: 16px;
-    border: 2px dashed rgba(255, 255, 255, 0.08);
-    letter-spacing: 6px;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.02);
-    font-size: 1.2rem;
-    font-weight: 600;
-    transition: all 0.3s;
-    width: 100%;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
-}
-
-.code-display:hover {
-    border-color: rgba(155, 89, 255, 0.3);
-    background: rgba(255, 255, 255, 0.04);
-}
-
-/* Loader */
-.loader {
-    width: 32px;
-    height: 32px;
-    border: 3px solid rgba(255, 255, 255, 0.05);
-    border-top: 3px solid #9b59ff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+/* User Area */
+.user-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.user-card{border:1px solid #191919;background:#080808;border-radius:18px;padding:22px}
+.row{display:flex;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid #151515;font-size:10px}
+.row:last-child{border-bottom:0}
+.row span:first-child{color:#666}
+.toggle{width:42px;height:22px;background:#222;border:1px solid #333;border-radius:20px;position:relative;cursor:pointer}
+.toggle:after{content:"";width:16px;height:16px;background:#777;border-radius:50%;position:absolute;left:2px;top:2px;transition:.2s}
+.toggle.on{background:#fff}.toggle.on:after{left:22px;background:#000}
 
 /* Footer */
-footer {
-    margin-top: 22px;
-    font-size: 0.7rem;
-    color: #444;
-    letter-spacing: 0.5px;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-    padding-top: 18px;
+footer{border-top:1px solid #151515;padding:35px 0;color:#555;font-size:10px}
+.footer{display:flex;justify-content:space-between;gap:20px}
+.footer strong{color:#fff}
+
+/* Modal */
+.modal{
+ position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(12px);
+ display:none;align-items:center;justify-content:center;padding:20px;z-index:300
+}
+.modal.show{display:flex}
+.modal-box{width:min(420px,100%);background:#080808;border:1px solid #282828;border-radius:20px;padding:25px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-head h3{font-family:Orbitron;font-size:15px}
+.close{background:none;border:0;color:#777;font-size:20px}
+
+
+/* ===== BLACK QUEEN V1 MOBILE-FIRST POLISH ===== */
+
+/* ===== COMPACT LOGO FIX ===== */
+.logo-mark{
+  width:34px !important;
+  height:34px !important;
+  min-width:34px;
+  border-radius:10px;
+  box-shadow:0 0 12px rgba(255,255,255,.07) !important;
+}
+.logo-mark img{width:100%;height:100%;object-fit:cover}
+.bot-avatar{
+  width:68px !important;
+  height:68px !important;
+  min-width:68px;
+  border-radius:18px;
+  margin:42px auto 10px !important;
+  box-shadow:0 0 22px rgba(255,255,255,.07) !important;
+}
+.bot-avatar:after{inset:-8px !important}
+.version{margin-bottom:10px !important}
+.phone h3{font-size:15px}
+.phone p{margin-bottom:18px !important}
+@media(max-width:650px){
+  .logo-mark{width:30px !important;height:30px !important;min-width:30px;border-radius:9px}
+  .logo-title{font-size:10px !important}
+  .logo-sub{font-size:6px !important}
+  .bot-avatar{
+    width:58px !important;height:58px !important;min-width:58px;
+    border-radius:15px;margin:35px auto 8px !important;
+  }
+  .bot-avatar:after{inset:-6px !important}
+  .phone h3{font-size:13px}
+  .phone p{font-size:8px !important;margin-bottom:15px !important}
 }
 
-/* ===== RGB BORDER (FOR INPUT & BUTTON) ===== */
-@keyframes rgbMove {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
+body{background:#020202;color:#f5f5f5}
+::selection{background:#fff;color:#000}
+button,a,.card,.cmd,.mini,.toggle,.logo-mark,.bot-avatar{will-change:transform}
+.logo-mark img{filter:saturate(.72) contrast(1.05)}
+.logo-mark{box-shadow:0 0 18px rgba(255,255,255,.08)}
+.bot-avatar{box-shadow:0 0 35px rgba(255,255,255,.09);animation:logoBreath 4s ease-in-out infinite}
+@keyframes logoBreath{
+  0%,100%{transform:scale(1);box-shadow:0 0 28px rgba(255,255,255,.07)}
+  50%{transform:scale(1.025);box-shadow:0 0 42px rgba(255,255,255,.13)}
+}
+.badge{animation:fadeUp .7s both}
+.hero h1{animation:fadeUp .8s .08s both}
+.hero p{animation:fadeUp .8s .16s both}
+.hero .actions{animation:fadeUp .8s .24s both}
+.hero-card{animation:cardIn .9s .12s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.live{animation:livePulse 1.8s ease-in-out infinite}
+@keyframes livePulse{50%{transform:scale(1.5);box-shadow:0 0 18px #fff}}
+.primary{box-shadow:0 0 0 rgba(255,255,255,0);animation:buttonGlow 3.5s ease-in-out infinite}
+@keyframes buttonGlow{50%{box-shadow:0 0 22px rgba(255,255,255,.08)}}
+.card,.cmd{position:relative;overflow:hidden}
+.card:before,.cmd:before{
+ content:"";position:absolute;top:0;left:-120%;width:70%;height:1px;
+ background:linear-gradient(90deg,transparent,#fff,transparent);opacity:.18;
+ transition:left .7s ease
+}
+.card:hover:before,.cmd:hover:before{left:140%}
+.cmd code{transition:letter-spacing .25s ease}
+.cmd:hover code{letter-spacing:1px}
+.nav-links a{position:relative}
+.nav-links a:after{
+ content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:#fff;transition:.25s
+}
+.nav-links a:hover:after{right:0}
+section{animation:sectionFade .7s ease both}
+@keyframes sectionFade{from{opacity:.65}to{opacity:1}}
+.connect-box{transition:.3s}
+.connect-box:focus-within{border-color:#333;box-shadow:0 0 35px rgba(255,255,255,.035)}
+.input{transition:.25s}
+.input:focus{border-color:#555;box-shadow:0 0 20px rgba(255,255,255,.04)}
+.toggle{transition:.25s}
+.toggle.on{box-shadow:0 0 14px rgba(255,255,255,.08)}
+.mini{transition:.25s}
+.mini:hover{transform:translateY(-2px);border-color:#333}
+footer strong{transition:.2s}
+footer strong:hover{letter-spacing:.5px}
+
+/* Reveal utility */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* Keep logo subtle */
+.logo-mark{flex-shrink:0}
+.logo-title{white-space:nowrap}
+
+/* Better phone sizing */
+.phone{box-shadow:inset 0 0 60px rgba(255,255,255,.018)}
+.status-box .mini b{letter-spacing:.3px}
+
+/* Mobile navigation animation */
+@media(max-width:650px){
+ .nav-links{animation:navDrop .25s ease both}
+ @keyframes navDrop{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
+ .nav{height:64px}
+ header{background:rgba(2,2,2,.88)}
+ .logo-mark{width:38px;height:38px;border-radius:11px}
+ .logo-title{font-size:11px}
+ .logo-sub{font-size:7px}
+ .hero{padding-top:112px}
+ .hero-wrap{gap:28px}
+ .hero-card{margin-top:5px}
+ .phone{min-height:370px;padding:15px}
+ .bot-avatar{width:82px;height:82px;margin-top:45px;border-radius:22px}
+ .phone h3{font-size:14px}
+ .phone p{font-size:9px;margin-bottom:19px}
+ .mini{padding:11px}
+ .mini b{font-size:12px}
+ .mini span{font-size:7px}
+ .section-head{margin-bottom:20px}
+ h2{font-size:22px}
+ .card{padding:18px}
+ .cmd{padding:14px}
+ .cmd code{font-size:10px}
+ .cmd span{font-size:8px}
+ .connect{border-radius:20px}
+ .connect-box{padding:16px}
+}
+@media(max-width:380px){
+ h1{font-size:35px}
+ .hero p{font-size:12px}
+ .primary,.secondary{padding:12px 14px}
+ .status-box{gap:7px}
 }
 
-/* Input Box with RGB Border */
-.rgb-box {
-    padding: 3px;
-    border-radius: 18px;
-    background: linear-gradient(90deg, #ff4d6d, #ff8a4d, #ffd93d, #6bcb77, #4d96ff, #9b59ff, #ff4d6d);
-    background-size: 300% 100%;
-    animation: rgbMove 4s linear infinite;
-    width: 100%;
-    max-width: 340px;
-    margin: 0 auto 16px auto;
-    transition: all 0.3s;
-    box-shadow: 0 0 30px rgba(155, 89, 255, 0.05);
+/* Responsive */
+@media(max-width:900px){
+ .hero-wrap,.connect-grid,.user-grid{grid-template-columns:1fr}
+ .hero{padding-top:125px}
+ .hero-card{max-width:520px;margin:auto}
+ .cards{grid-template-columns:1fr 1fr}
+ .commands{grid-template-columns:repeat(3,1fr)}
 }
-
-.rgb-box input {
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 16px;
-    border-radius: 16px;
-    background: #0a0a0f;
-    color: #fff;
-    text-align: center;
-    font-size: 1.05rem;
-    font-family: 'Poppins', sans-serif;
+@media(max-width:650px){
+ .nav-links,.nav-btn{display:none}.menu{display:block}
+ .nav.open .nav-links{
+   display:flex;position:absolute;top:72px;left:0;right:0;background:#050505;
+   border-bottom:1px solid #191919;padding:18px;flex-direction:column
+ }
+ h1{font-size:42px}.hero{min-height:auto;padding-bottom:60px}
+ section{padding:65px 0}.cards,.commands{grid-template-columns:1fr 1fr}
+ .section-head{display:block}.section-head p{margin-top:10px}.command-search{margin-top:15px;width:100%}
+ .connect{padding:22px}.footer{display:block}.footer div+div{margin-top:12px}
 }
-
-.rgb-box input::placeholder {
-    color: #555;
+@media(max-width:650px){
+ .card[style*="repeat(4"]{grid-template-columns:1fr 1fr !important}
 }
-
-/* Button with RGB Border */
-.rgb-btn {
-    width: 100%;
-    max-width: 340px;
-    padding: 3px;
-    border-radius: 18px;
-    background: linear-gradient(90deg, #ff4d6d, #ff8a4d, #ffd93d, #6bcb77, #4d96ff, #9b59ff, #ff4d6d);
-    background-size: 300% 100%;
-    animation: rgbMove 4s linear infinite;
-    border: none;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
-    transition: all 0.3s;
-}
-
-.btn-inner {
-    background: #0a0a0f;
-    color: #fff;
-    display: block;
-    padding: 14px;
-    border-radius: 16px;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s;
-}
-
-.rgb-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 40px rgba(155, 89, 255, 0.2);
-}
-
-.rgb-btn:hover .btn-inner {
-    background: #111118;
-}
-
-/* Result Box with RGB Border */
-.result-box {
-    width: 100%;
-    max-width: 340px;
-    margin: 16px auto 0;
-    padding: 3px;
-    border-radius: 18px;
-    background: linear-gradient(90deg, #ff4d6d, #ff8a4d, #ffd93d, #6bcb77, #4d96ff, #9b59ff, #ff4d6d);
-    background-size: 300% 100%;
-    animation: rgbMove 5s linear infinite;
-    display: none;
-    box-shadow: 0 0 40px rgba(155, 89, 255, 0.05);
-}
-
-.result-inner {
-    background: #0a0a0f;
-    border-radius: 16px;
-    padding: 16px;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-#codeBox {
-    letter-spacing: 4px;
-    color: #fff;
-    cursor: default;
-}
-
-/* Small decorative elements */
-.divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin: 4px 0 10px 0;
-    opacity: 0.3;
-}
-
-.divider span {
-    width: 30px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-}
-
-.badge-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 4px;
-}
-
-.badge {
-    padding: 4px 14px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 0.6rem;
-    letter-spacing: 0.5px;
-    color: #888;
-    font-weight: 500;
-}
-
-@media (max-width: 480px) {
-    .card { padding: 24px 16px; }
-    h1 { font-size: 1.7rem; }
-    h1:last-of-type { font-size: 1.4rem; }
+@media(max-width:430px){
+ .cards,.commands{grid-template-columns:1fr}
+ .actions>*{width:100%;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="grid-bg"></div>
+<div class="orb one"></div><div class="orb two"></div>
 
-<h1 class="rgb-text">MAKO MD 🦋</h1>
-<h1 class="rgb-text">PAIR CODE</h1>
+<script>
+for(let i=0;i<35;i++){
+ const p=document.createElement('span');
+ p.className='particle';
+ p.style.left=Math.random()*100+'%';
+ p.style.animationDelay=Math.random()*9+'s';
+ p.style.animationDuration=(6+Math.random()*8)+'s';
+ document.body.appendChild(p);
+}
+</script>
 
-<p class="status rgb-text">TYPE YOUR WHATSAPP NUMBER</p>
+<header>
+ <div class="container nav" id="nav">
+  <a class="logo" href="#home">
+   <div class="logo-mark"><img src="https://files.catbox.moe/1h8eyp.jpeg" alt="BLACK QUEEN MD"></div>
+   <div><div class="logo-title">BLACK QUEEN MD</div><div class="logo-sub">OFFICIAL BOT</div></div>
+  </a>
+  <nav class="nav-links">
+   <a href="#home">Home</a><a href="#commands">Commands</a><a href="#connect">Connect</a>
+   <a href="#mybot">My Bot</a><a href="#about">About</a>
+  </nav>
+  <button class="nav-btn" onclick="openLogin()">MY ACCOUNT</button>
+  <button class="menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+ </div>
+</header>
 
-<!-- Input with RGB Border -->
-<div class="rgb-box">
-    <input type="text" id="number" placeholder="94xxxxxxxxx">
-</div>
+<main id="home">
+<section class="hero">
+ <div class="container hero-wrap">
+  <div>
+   <div class="badge"><span class="live"></span> BLACK QUEEN MD • V1 • ONLINE</div>
+   <h1>BLACK QUEEN<br><span class="gradient">MD V1.</span></h1>
+   <p>BLACK QUEEN MD is a powerful WhatsApp bot built for a smooth, simple and futuristic experience. Connect your account and explore the bot's tools in seconds.</p>
+   <div class="actions">
+    <a class="primary" href="#connect">CONNECT BOT →</a>
+    <a class="secondary" href="#commands">EXPLORE COMMANDS</a>
+   </div>
+  </div>
+  <div class="hero-card">
+   <div class="phone">
+    <div class="phone-top"><span>BLACK QUEEN MD</span><span>● ONLINE</span></div>
+    <div class="bot-avatar"><img src="https://files.catbox.moe/1h8eyp.jpeg" alt="BLACK QUEEN MD Logo"></div>
+    <div class="version">V1</div>
+    <h3>BLACK QUEEN MD</h3>
+    <p>MAKO × SIRIMATH DEV &lt;/&gt;</p>
+    <div class="status-box">
+     <div class="mini"><b>20+</b><span>COMMANDS</span></div>
+     <div class="mini"><b>V1</b><span>VERSION</span></div>
+     <div class="mini"><b>FAST</b><span>RESPONSE</span></div>
+     <div class="mini"><b>24/7</b><span>AVAILABILITY</span></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
 
-<!-- Button with RGB Border -->
-<button class="rgb-btn" onclick="getCode()">
-    <span class="btn-inner">GET PAIR CODE</span>
-</button>
+<section style="padding-top:20px">
+ <div class="container">
+  <div class="card" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px;background:#050505">
+   <div class="mini"><b>V1</b><span>BOT VERSION</span></div>
+   <div class="mini"><b>24/7</b><span>ONLINE READY</span></div>
+   <div class="mini"><b>20+</b><span>COMMANDS</span></div>
+   <div class="mini"><b>FAST</b><span>RESPONSE</span></div>
+  </div>
+ </div>
+</section>
 
-<!-- Result Box with RGB Border -->
-<div class="result-box" id="borderBox">
-    <div class="result-inner" id="codeBox">----</div>
-</div>
+<section>
+ <div class="container">
+  <div class="section-head">
+   <div><div class="kicker">WHY BLACK QUEEN</div><h2>MADE FOR USERS</h2></div>
+   <p>Everything is designed around a simple goal: make using your bot easy, fast and beautiful.</p>
+  </div>
+  <div class="cards">
+   <div class="card reveal"><div class="icon">⚡</div><h3>Fast Experience</h3><p>Clean interface with quick access to the tools you use most.</p></div>
+   <div class="card reveal"><div class="icon">⌘</div><h3>Powerful Commands</h3><p>Discover 20+ bot commands from one organized command center.</p></div>
+   <div class="card reveal"><div class="icon">◈</div><h3>Simple Connection</h3><p>Use the connection area to pair your WhatsApp session with the bot.</p></div>
+  </div>
+ </div>
+</section>
 
-<!-- Footer Badges -->
-<div class="badge-group">
-    <span class="badge">🤖 WHATSAPP BOT</span>
-    <span class="badge">⚡ MAKO MD</span>
-    <span class="badge">✨ 2026</span>
-</div>
+<section id="commands">
+ <div class="container">
+  <div class="section-head">
+   <div><div class="kicker">BOT COMMANDS</div><h2>COMMAND CENTER</h2></div>
+   <input id="search" class="command-search" placeholder="Search command..." oninput="filterCommands()">
+  </div>
+  <div class="commands" id="commandList">
+   <div class="cmd"><code>/menu</code><span>Main menu</span></div>
+   <div class="cmd"><code>/ping</code><span>Check response</span></div>
+   <div class="cmd"><code>/alive</code><span>Bot status</span></div>
+   <div class="cmd"><code>/runtime</code><span>Show uptime</span></div>
+   <div class="cmd"><code>/owner</code><span>Owner info</span></div>
+   <div class="cmd"><code>/help</code><span>Help center</span></div>
+   <div class="cmd"><code>/info</code><span>Bot information</span></div>
+   <div class="cmd"><code>/sticker</code><span>Create sticker</span></div>
+   <div class="cmd"><code>/toimg</code><span>Convert media</span></div>
+   <div class="cmd"><code>/play</code><span>Media search</span></div>
+   <div class="cmd"><code>/yt</code><span>YouTube tools</span></div>
+   <div class="cmd"><code>/download</code><span>Media download</span></div>
+   <div class="cmd"><code>/weather</code><span>Weather</span></div>
+   <div class="cmd"><code>/translate</code><span>Translation</span></div>
+   <div class="cmd"><code>/quote</code><span>Random quote</span></div>
+   <div class="cmd"><code>/group</code><span>Group tools</span></div>
+   <div class="cmd"><code>/admins</code><span>Admin list</span></div>
+   <div class="cmd"><code>/tagall</code><span>Tag members</span></div>
+   <div class="cmd"><code>/antilink</code><span>Anti-link</span></div>
+   <div class="cmd"><code>/welcome</code><span>Welcome system</span></div>
+   <div class="cmd"><code>/goodbye</code><span>Goodbye system</span></div>
+   <div class="cmd"><code>/mute</code><span>Mute group</span></div>
+   <div class="cmd"><code>/unmute</code><span>Unmute group</span></div>
+  </div>
+ </div>
+</section>
 
-<p class="status rgb-text" style="margin-top: 10px; font-size: 0.6rem;">MADE BY PODI MAKO · MINI BOT EDITION</p>
+<section id="connect">
+ <div class="container">
+  <div class="connect">
+   <div class="connect-grid">
+    <div>
+     <div class="kicker">GET STARTED</div>
+     <h2>CONNECT YOUR BOT</h2>
+     <p style="color:#666;font-size:11px;line-height:1.8;margin:14px 0 24px">Connect your WhatsApp session to BLACK QUEEN MD. The UI below is ready for your backend/API connection.</p>
+     <div class="steps">
+      <div class="step"><div class="num">01</div><div><b>Enter your number</b><p>Use your WhatsApp number with country code.</p></div></div>
+      <div class="step"><div class="num">02</div><div><b>Request pairing</b><p>Your backend can generate the real pair code here.</p></div></div>
+      <div class="step"><div class="num">03</div><div><b>Connect</b><p>Enter the code in WhatsApp and start using BLACK QUEEN MD.</p></div></div>
+     </div>
+    </div>
+    <div class="connect-box">
+     <div class="kicker">PAIR SESSION</div>
+     <input id="phone" class="input" placeholder="+94 7X XXX XXXX" inputmode="tel">
+     <button class="primary" style="width:100%" onclick="requestPair()">REQUEST PAIR CODE</button>
+     <div id="connectResult" class="connect-result"></div>
+     <!-- BACKEND HOOK:
+          Replace requestPair() with your real API request.
+          Example endpoint: POST /api/pair
+     -->
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
 
+<section id="mybot">
+ <div class="container">
+  <div class="section-head">
+   <div><div class="kicker">PERSONAL AREA</div><h2>MY BOT</h2></div>
+   <p>These controls are frontend placeholders ready to connect to your own authenticated backend.</p>
+  </div>
+  <div class="user-grid">
+   <div class="user-card">
+    <div class="row"><span>Connection</span><strong id="connectionStatus">NOT CONNECTED</strong></div>
+    <div class="row"><span>Bot</span><strong>BLACK QUEEN MD</strong></div>
+    <div class="row"><span>Session</span><strong id="sessionText">—</strong></div>
+    <div class="row"><span>Version</span><strong>V1</strong></div>
+   </div>
+   <div class="user-card">
+    <div class="row"><span>Auto Read</span><div class="toggle on" onclick="toggle(this)"></div></div>
+    <div class="row"><span>Auto Typing</span><div class="toggle on" onclick="toggle(this)"></div></div>
+    <div class="row"><span>Welcome Message</span><div class="toggle" onclick="toggle(this)"></div></div>
+    <div class="row"><span>Anti Link</span><div class="toggle on" onclick="toggle(this)"></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="about">
+ <div class="container">
+  <div class="section-head">
+   <div><div class="kicker">THE PROJECT</div><h2>ABOUT BLACK QUEEN</h2></div>
+  </div>
+  <div class="card" style="max-width:760px">
+   <h3 style="font-family:Orbitron;margin-bottom:12px">BLACK QUEEN MD</h3>
+   <p>BLACK QUEEN MD is a user-focused WhatsApp bot experience built with a futuristic black and white identity. This website is intentionally frontend-only so you can connect your own backend, authentication, database and bot API.</p>
+   <div class="row" style="margin-top:15px"><span>OWNER</span><strong>MAKO &amp; SIRIMATH DEV &lt;/&gt;</strong></div>
+   <div class="row"><span>THEME</span><strong>BLACK / WHITE</strong></div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="container footer">
+  <div>© 2026 <strong>BLACK QUEEN MD</strong></div>
+  <div>MAKO &amp; SIRIMATH DEV &lt;/&gt;</div>
+ </div>
+</footer>
+
+<!-- Login modal -->
+<div class="modal" id="loginModal">
+ <div class="modal-box">
+  <div class="modal-head"><h3>MY ACCOUNT</h3><button class="close" onclick="closeLogin()">×</button></div>
+  <input id="loginUser" class="input" placeholder="Username / Email">
+  <input id="loginPass" class="input" type="password" placeholder="Password">
+  <button class="primary" style="width:100%" onclick="login()">LOGIN</button>
+  <p id="loginMsg" style="font-size:10px;color:#666;text-align:center;margin-top:12px"></p>
+  <!-- BACKEND HOOK:
+       Replace login() with your real authentication API.
+  -->
+ </div>
 </div>
 
 <script>
-// ===== EXACT ORIGINAL FUNCTIONALITY - NO CHANGES =====
-async function getCode() {
-    const num = document.getElementById("number").value.replace(/[^0-9]/g, '');
-    const codeBox = document.getElementById("codeBox");
-    const borderBox = document.getElementById("borderBox");
+function openLogin(){document.getElementById('loginModal').classList.add('show')}
+function closeLogin(){document.getElementById('loginModal').classList.remove('show')}
 
-    // Agar number khali hai
-    if (!num) {
-        borderBox.style.display = "block";
-        codeBox.style.letterSpacing = "normal";
-        codeBox.style.color = "#ff4d6d";
-        codeBox.innerText = "APNA WHATSAPP NUMBER LIKHE";
-        return;
-    }
-
-    // Loading State
-    borderBox.style.display = "block";
-    codeBox.style.letterSpacing = "normal";
-    codeBox.style.color = "#9b59ff";
-    codeBox.innerText = "CONNECTING.....";
-
-    try {
-        const res = await fetch(`/code?number=${num}`);
-        const data = await res.json();
-        
-        if (data.code) {
-            codeBox.style.letterSpacing = "4px";
-            codeBox.style.color = "#fff";
-            codeBox.innerText = data.code;
-        } else {
-            codeBox.style.color = "#ff4d6d";
-            codeBox.innerText = "SERVER FULL";
-        }
-    } catch (e) {
-        codeBox.style.color = "#ff4d6d";
-        codeBox.innerText = "SERVER IS FULL";
-    }
+function filterCommands(){
+ const q=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('.cmd').forEach(c=>{
+  c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';
+ });
 }
 
-// Enter key support
-document.getElementById("number").addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        getCode();
-    }
+function toggle(el){el.classList.toggle('on')}
+
+function requestPair(){
+ const phone=document.getElementById('phone').value.trim();
+ const box=document.getElementById('connectResult');
+ if(!phone){box.style.display='block';box.innerText='Please enter your WhatsApp number first.';return}
+ box.style.display='block';
+ box.innerHTML='<b>PAIR REQUEST READY</b><br>Backend/API connection required to generate the real pairing code.<br><br>Number: '+phone;
+ document.getElementById('connectionStatus').innerText='PAIR REQUESTED';
+ document.getElementById('sessionText').innerText='WAITING';
+ /*
+   REAL BACKEND EXAMPLE:
+   fetch('/api/pair',{
+     method:'POST',
+     headers:{'Content-Type':'application/json'},
+     body:JSON.stringify({phone})
+   }).then(r=>r.json()).then(data=>{
+      // show data.pairCode
+   });
+ */
+}
+
+function login(){
+ const u=document.getElementById('loginUser').value.trim();
+ const p=document.getElementById('loginPass').value.trim();
+ const msg=document.getElementById('loginMsg');
+ if(!u||!p){msg.innerText='Enter your login details.';return}
+ msg.innerText='Frontend demo login successful.';
+ setTimeout(closeLogin,700);
+ /*
+   Replace with your real API:
+   POST /api/login
+ */
+}
+
+
+const revealObserver=new IntersectionObserver((entries)=>{
+ entries.forEach(entry=>{
+   if(entry.isIntersecting) entry.target.classList.add('visible');
+ });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+document.addEventListener('click',e=>{
+ if(e.target===document.getElementById('loginModal')) closeLogin();
 });
 </script>
-
 </body>
 </html>
